@@ -6,7 +6,11 @@ SeaHawk Vertical Profiling Float (Float) code
 
 Cabrillo Robotics Club is participating in the MATE ROV underwater internaitonal robotics competition for 2023
 
-![](https://materovcompetition.org/hs-fs/hubfs/MATE-ROV-Competition-2023-Patch.png?width=900&height=900&name=MATE-ROV-Competition-2023-Patch.png)
+[materovcompetition.org](https://materovcompetition.org/world-championship)
+
+![(mate rov comp 2023 patch)](https://materovcompetition.org/hs-fs/hubfs/MATE-ROV-Competition-2023-Patch.png?width=900&height=900&name=MATE-ROV-Competition-2023-Patch.png)
+
+![(mate rov comp 2023 location)](https://materovcompetition.org/hubfs/Longmont%20St.%20Vrain%20announcement.png)
 
 One of the chalenges in that competition is building a vertical profiling float.
 
