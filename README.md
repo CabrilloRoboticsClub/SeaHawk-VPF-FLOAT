@@ -2,6 +2,14 @@
 
 SeaHawk Vertical Profiling Float (Float) code
 
+## Background
+
+Cabrillo Robotics Club is participating in the MATE ROV underwater internaitonal robotics competition for 2023
+
+One of the chalenges in that competition is building a vertical profiling float.
+
+This is the code that powers our entry for that part of the compeption.
+
 ## Components
 
 | Store | Learn Article |
