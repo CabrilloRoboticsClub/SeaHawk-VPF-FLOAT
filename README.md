@@ -24,3 +24,7 @@ This is the code that powers our entry for that part of the compeption.
 | [Adafruit LoRa Radio FeatherWing - RFM95W 900 MHz - RadioFruit](https://www.adafruit.com/product/3231) | [Radio FeatherWing](https://learn.adafruit.com/radio-featherwing/overview) |
 | [DC Motor + Stepper FeatherWing Add-on For All Feather Boards](https://www.adafruit.com/product/2927) | [Adafruit Stepper + DC Motor FeatherWing](https://learn.adafruit.com/adafruit-stepper-dc-motor-featherwing/overview) |
 | [Adafruit Ultimate GPS FeatherWing](https://www.adafruit.com/product/3133) | [Adafruit Ultimate GPS featherwing](https://learn.adafruit.com/adafruit-ultimate-gps-featherwing/overview) |
+
+## Notes
+
+* [Renaming CIRCUITPY](https://learn.adafruit.com/welcome-to-circuitpython/renaming-circuitpy#renaming-circuitpy-on-linux-3014493)
