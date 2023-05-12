@@ -37,7 +37,6 @@ import time
 # instantiate the spi interface
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 
-
 #
 # LoRa Radio Wing SETUP
 #
@@ -60,10 +59,6 @@ rfm9x.destination = 50
 
 while True:
 
-    rfm9x.send(bytes("Message 1\r\n", "utf-8"))
+    rfm9x.send(bytes("Team: PN01" + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
 
-    time.sleep(5)
-
-    rfm9x.send(bytes("Message 2\r\n", "utf-8"))
-
-    time.sleep(5)
+    time.sleep(.5)
