@@ -23,6 +23,8 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
+TEAM_NUM = "PN01"
+
 # python hardware interfaces
 import board
 import busio
@@ -51,14 +53,14 @@ RADIO_FREQ_MHZ = 915.0
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ)
 
 # set my lora node ID
-rfm9x.node = 100
+rfm9x.node = 18
 
 # set the destination lora node ID
 # destination is deck
-rfm9x.destination = 50
+rfm9x.destination = 28
 
 while True:
 
-    rfm9x.send(bytes("Team: PN01" + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
+    rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
 
     time.sleep(.5)
