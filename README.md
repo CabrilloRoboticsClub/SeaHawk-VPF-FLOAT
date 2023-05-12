@@ -27,3 +27,5 @@ This is the code that powers our entry for that part of the compeption.
 ## Notes
 
 * [Renaming CIRCUITPY](https://learn.adafruit.com/welcome-to-circuitpython/renaming-circuitpy#renaming-circuitpy-on-linux-3014493)
+
+* [CircuitPython Feather RP2040](https://circuitpython.org/board/adafruit_feather_rp2040/)
