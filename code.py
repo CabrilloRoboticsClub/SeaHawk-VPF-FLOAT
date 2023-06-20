@@ -73,9 +73,10 @@ import adafruit_rfm9x
 # instantiate the spi interface
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 
-# chip select pin
+# LoRa Module Chip Select on Digital Pin 5
 CS = digitalio.DigitalInOut(board.D5)
-# reset pin
+
+# LoRa Module Reset on Digital Pin 6
 RESET = digitalio.DigitalInOut(board.D6)
 
 # set the radio frequency to 915mhz (NOT 868)
@@ -119,14 +120,14 @@ def transmit():
 def dive():
     # motor1 is the motor that fills the reservoir with water
     kit.motor1.throttle = 1.0
-    time.sleep(BILGE_FILL_DURATION) 
+    time.sleep(BILGE_FILL_DURATION)
     kit.motor1.throttle = 0.0
 
 # empty the ballast to make the float surface
 def surface():
     # motor2 is the motor that empties the reservoir
     kit.motor2.throttle = 1.0
-    time.sleep(BILGE_EMPTY_DURATION) 
+    time.sleep(BILGE_EMPTY_DURATION)
     kit.motor2.throttle = 0.0
 
 
@@ -134,6 +135,19 @@ def surface():
 # Main Loop
 # # # # # # # #
 
+# wait for receive to start
+while True:
+
+    packet = rfm9x.receive()
+
+    if packet is None:
+        pass
+    elif str(packet, "utf-8") == "CABRILLO VPF DIVE":
+        break
+    else:
+        pass
+        
+# profiling cycle
 while True:
     start_time = time.time()
     while time.time() - start_time < TRANSMIT_DURATION:
