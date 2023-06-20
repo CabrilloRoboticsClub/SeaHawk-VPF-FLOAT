@@ -23,6 +23,9 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
+# team number as defined by MATE
+TEAM_NUM = "PN03"
+
 import time
 import board
 import busio
@@ -35,12 +38,14 @@ import adafruit_rfm9x
 # instantiate the spi interface
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 
+# chip select pin
+CS = digitalio.DigitalInOut(board.D5)
+# reset pin
+RESET = digitalio.DigitalInOut(board.D6)
+
 #
 # LoRa Radio Wing SETUP
 #
-
-CS = digitalio.DigitalInOut(board.D5)
-RESET = digitalio.DigitalInOut(board.D6)
 
 # set the radio frequency to 915mhz
 RADIO_FREQ_MHZ = 915.0 
@@ -58,7 +63,6 @@ rfm9x.destination = 28
 # Set up the motor kit
 kit = MotorKit()
 
-TEAM_NUM = "PN03"
 duration = 10
 def transmit():
     rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
