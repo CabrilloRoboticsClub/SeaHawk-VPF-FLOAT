@@ -27,6 +27,8 @@ import time
 import board
 import busio
 import digitalio
+
+# motor kit for the water pumps
 from adafruit_motorkit import MotorKit
 
 # lora radio library
