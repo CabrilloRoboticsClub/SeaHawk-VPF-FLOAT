@@ -23,9 +23,9 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
-#
+# # # # # # # #
 # IMPORTS
-#
+# # # # # # # #
 
 import time
 import board
@@ -36,9 +36,10 @@ from adafruit_motorkit import MotorKit
 # lora radio library
 import adafruit_rfm9x
 
-#
+
+# # # # # # # #
 # CONSTANTS
-#
+# # # # # # # #
 
 # team number as defined by MATE
 TEAM_NUM = "PN03"
@@ -47,9 +48,9 @@ FLOAT_LORA_ID = 18
 
 DECK_LORA_ID = 28
 
-#
+# # # # # # # # #
 # BUS SETUP
-#
+# # # # # # # # #
 
 # instantiate the spi interface
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
@@ -62,9 +63,9 @@ RESET = digitalio.DigitalInOut(board.D6)
 # set the radio frequency to 915mhz (NOT 868)
 RADIO_FREQ_MHZ = 915.0 
 
-#
+# # # # # # # #
 # LoRa Radio Wing SETUP
-#
+# # # # # # # #
 
 # instantiate the lora radio in 915mhz mode
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ)
