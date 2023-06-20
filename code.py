@@ -44,9 +44,27 @@ import adafruit_rfm9x
 # team number as defined by MATE
 TEAM_NUM = "PN03"
 
+# LoRa Device ID for the Float Transceiver
 FLOAT_LORA_ID = 18
 
+# LoRa Device ID for the Deck Transceiver
 DECK_LORA_ID = 28
+
+# number of seconds to wait on the surface transmitting before diving again
+TRANSMIT_DURATION = 10
+
+# number of seconds it takes for the pump to fill the tank
+BILGE_FILL_DURATION = 5
+
+# number of seconds it takes for the float to sink to the bottom
+DIVE_DURATION = 5
+
+# number of seconds it takes for the pump to empty the tank
+BILGE_EMPTY_DURATION = 5
+
+# number of seconds it takes for the float to rise to the surface
+SURFACE_DURATION = 5
+
 
 # # # # # # # # #
 # BUS SETUP
@@ -63,6 +81,7 @@ RESET = digitalio.DigitalInOut(board.D6)
 # set the radio frequency to 915mhz (NOT 868)
 RADIO_FREQ_MHZ = 915.0 
 
+
 # # # # # # # #
 # LoRa Radio Wing SETUP
 # # # # # # # #
@@ -71,41 +90,53 @@ RADIO_FREQ_MHZ = 915.0
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ)
 
 # set my lora node ID
+# I am the float
 rfm9x.node = FLOAT_LORA_ID
 
 # set the destination lora node ID
 # destination is deck
 rfm9x.destination = DECK_LORA_ID
 
+
+
+# # # # # # # #
+# MotorKit SETUP
+# # # # # # # #
+
 # Set up the motor kit
 kit = MotorKit()
 
-duration = 10
+
+# # # # # # # #
+# Functions
+# # # # # # # #
+
+# transmit the time in seconds
 def transmit():
     rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
     time.sleep(.5)
 
-# descend function
-def descend():
+# fill the ballast with water to make the float dive
+def dive():
     # motor1 is the motor that fills the reservoir with water
     kit.motor1.throttle = 1.0  
-    time.sleep(5) 
+    time.sleep(BILGE_FILL_DURATION) 
     kit.motor1.throttle = 0.0  
 
-# ascend function
-def ascend():
+# empty the ballast to make the float surface
+def surface():
     # motor2 is the motor that empties the reservoir
     kit.motor2.throttle = 1.0 
-    time.sleep(5) 
+    time.sleep(BILGE_EMPTY_DURATION) 
     kit.motor2.throttle = 0.0  
 
 # Main program loop
 while True:
     start_time = time.time()
-    while time.time() - start_time < duration:
+    while time.time() - start_time < TRANSMIT_DURATION:
         transmit()
 
-    descend()
-    time.sleep(5)
-    ascend()
-    time.sleep(5)
+    dive()
+    time.sleep(DIVE_DURATION)
+    surface()
+    time.sleep(SURFACE_DURATION)
