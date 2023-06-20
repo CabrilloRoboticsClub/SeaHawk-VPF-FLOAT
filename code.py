@@ -118,16 +118,16 @@ def transmit():
 # fill the ballast with water to make the float dive
 def dive():
     # motor1 is the motor that fills the reservoir with water
-    kit.motor1.throttle = 1.0  
+    kit.motor1.throttle = 1.0
     time.sleep(BILGE_FILL_DURATION) 
-    kit.motor1.throttle = 0.0  
+    kit.motor1.throttle = 0.0
 
 # empty the ballast to make the float surface
 def surface():
     # motor2 is the motor that empties the reservoir
-    kit.motor2.throttle = 1.0 
+    kit.motor2.throttle = 1.0
     time.sleep(BILGE_EMPTY_DURATION) 
-    kit.motor2.throttle = 0.0  
+    kit.motor2.throttle = 0.0
 
 
 # # # # # # # #
