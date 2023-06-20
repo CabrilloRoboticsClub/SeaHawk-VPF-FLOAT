@@ -23,44 +23,30 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
-TEAM_NUM = "PN01"
-
-# python hardware interfaces
-import board
-import busio
-import digitalio
-import os
-
-# lora radio library
-import adafruit_rfm9x
-
 import time
+import board
+import digitalio
+from adafruit_motorkit import MotorKit
 
-# instantiate the spi interface
-spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
+# Set up the motor kit
+kit = MotorKit()
 
-#
-# LoRa Radio Wing SETUP
-#
+# Function to control the motors
+def run_motors(motor1_duration, motor2_duration):
+    kit.motor1.throttle = 1.0  # Run motor 1 at full speed
+    time.sleep(motor1_duration)  # Run motor 1 for the specified duration
+    kit.motor1.throttle = 0.0  # Stop motor 1
+    time.sleep(5)
+    kit.motor2.throttle = 1.0  # Run motor 2 at full speed
+    time.sleep(motor2_duration)  # Run motor 2 for the specified duration
+    kit.motor2.throttle = 0.0  # Stop motor 2
 
-CS = digitalio.DigitalInOut(board.D5)
-RESET = digitalio.DigitalInOut(board.D6)
-
-# set the radio frequency to 915mhz
-RADIO_FREQ_MHZ = 915.0 
-
-# instantiate the lora radio in 915mhz mode
-rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ)
-
-# set my lora node ID
-rfm9x.node = 18
-
-# set the destination lora node ID
-# destination is deck
-rfm9x.destination = 28
-
+# Main program loop
 while True:
+    motor1_duration = 3  # Duration to run motor 1 (in seconds)
+    motor2_duration = 3  # Duration to run motor 2 (in seconds)
 
-    rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
+    run_motors(motor1_duration, motor2_duration)
 
-    time.sleep(.5)
+    # Delay between cycles
+    time.sleep(5)
