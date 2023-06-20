@@ -32,7 +32,7 @@ CS = digitalio.DigitalInOut(board.D5)
 # reset pin
 RESET = digitalio.DigitalInOut(board.D6)
 
-# LoRa Frequency 915mhz (NOT 800)
+# LoRa Frequency 915mhz (NOT 868)
 RADIO_FREQ_MHZ = 915.0 
 
 import time
