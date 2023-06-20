@@ -23,21 +23,16 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
-TEAM_NUM = "PN01"
-
-# python hardware interfaces
+import time
 import board
 import busio
 import digitalio
-import os
+from adafruit_motorkit import MotorKit
 
 # lora radio library
 import adafruit_rfm9x
 
 import time
-
-# stepper imports
-from adafruit_motor import stepper
 
 # instantiate the spi interface
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
@@ -62,8 +57,36 @@ rfm9x.node = 18
 # destination is deck
 rfm9x.destination = 28
 
-while True:
+# Set up the motor kit
+kit = MotorKit()
 
+TEAM_NUM = "PN03"
+duration = 10
+start_time = time.time()
+def transmit():
     rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
-
     time.sleep(.5)
+
+# descend function
+def descend():
+    # motor1 is the motor that fills the reservoir with water
+    kit.motor1.throttle = 1.0  
+    time.sleep(5) 
+    kit.motor1.throttle = 0.0  
+
+# ascend function
+def ascend():
+    # motor2 is the motor that empties the reservoir
+    kit.motor2.throttle = 1.0 
+    time.sleep(5) 
+    kit.motor2.throttle = 0.0  
+
+# Main program loop
+while True:
+    while time.time() - start_time < duration:
+        transmit()
+
+    descend()
+    time.sleep(5)
+    ascend()
+    time.sleep(5)
