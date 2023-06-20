@@ -23,6 +23,8 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
+TEAM_NUM = "PN03"
+
 import time
 import board
 import busio
@@ -62,7 +64,7 @@ rfm9x.destination = 28
 # Set up the motor kit
 kit = MotorKit()
 
-TEAM_NUM = "PN03"
+
 duration = 10
 start_time = time.time()
 def transmit():
