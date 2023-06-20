@@ -31,22 +31,24 @@ from adafruit_motorkit import MotorKit
 # Set up the motor kit
 kit = MotorKit()
 
-# Function to control the motors
-def run_motors(motor1_duration, motor2_duration):
-    kit.motor1.throttle = 1.0  # Run motor 1 at full speed
-    time.sleep(motor1_duration)  # Run motor 1 for the specified duration
-    kit.motor1.throttle = 0.0  # Stop motor 1
+# descend function
+def descend():
+    # motor1 is the motor that fills the reservoir with water
+    kit.motor1.throttle = 1.0  
+    time.sleep(5) 
+    kit.motor1.throttle = 0.0  
     time.sleep(5)
-    kit.motor2.throttle = 1.0  # Run motor 2 at full speed
-    time.sleep(motor2_duration)  # Run motor 2 for the specified duration
-    kit.motor2.throttle = 0.0  # Stop motor 2
+
+# ascend function
+def ascend():
+    kit.motor2.throttle = 1.0 
+    time.sleep(5) 
+    kit.motor2.throttle = 0.0  
+    time.sleep(5)
 
 # Main program loop
 while True:
-    motor1_duration = 3  # Duration to run motor 1 (in seconds)
-    motor2_duration = 3  # Duration to run motor 2 (in seconds)
+    descend()
+    ascend()
 
-    run_motors(motor1_duration, motor2_duration)
-
-    # Delay between cycles
     time.sleep(5)
