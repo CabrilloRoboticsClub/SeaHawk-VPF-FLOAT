@@ -23,7 +23,17 @@ Cabrillo Robotics Club
 cabrillorobotics@gmail.com
 '''
 
+# team number as defined by MATE
 TEAM_NUM = "PN03"
+
+# chip select pin
+CS = digitalio.DigitalInOut(board.D5)
+
+# reset pin
+RESET = digitalio.DigitalInOut(board.D6)
+
+# LoRa Frequency 915mhz (NOT 800)
+RADIO_FREQ_MHZ = 915.0 
 
 import time
 import board
@@ -44,12 +54,6 @@ spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 #
 # LoRa Radio Wing SETUP
 #
-
-CS = digitalio.DigitalInOut(board.D5)
-RESET = digitalio.DigitalInOut(board.D6)
-
-# set the radio frequency to 915mhz
-RADIO_FREQ_MHZ = 915.0 
 
 # instantiate the lora radio in 915mhz mode
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ)
