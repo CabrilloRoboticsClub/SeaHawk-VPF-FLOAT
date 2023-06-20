@@ -25,11 +25,45 @@ cabrillorobotics@gmail.com
 
 import time
 import board
+import busio
 import digitalio
 from adafruit_motorkit import MotorKit
 
+# lora radio library
+import adafruit_rfm9x
+
+# instantiate the spi interface
+spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
+
+#
+# LoRa Radio Wing SETUP
+#
+
+CS = digitalio.DigitalInOut(board.D5)
+RESET = digitalio.DigitalInOut(board.D6)
+
+# set the radio frequency to 915mhz
+RADIO_FREQ_MHZ = 915.0 
+
+# instantiate the lora radio in 915mhz mode
+rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ)
+
+# set my lora node ID
+rfm9x.node = 18
+
+# set the destination lora node ID
+# destination is deck
+rfm9x.destination = 28
+
 # Set up the motor kit
 kit = MotorKit()
+
+TEAM_NUM = "PN03"
+duration = 10
+start_time = time.time()
+def transmit():
+    rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
+    time.sleep(.5)
 
 # descend function
 def descend():
@@ -37,18 +71,20 @@ def descend():
     kit.motor1.throttle = 1.0  
     time.sleep(5) 
     kit.motor1.throttle = 0.0  
-    time.sleep(5)
 
 # ascend function
 def ascend():
+    # motor2 is the motor that empties the reservoir
     kit.motor2.throttle = 1.0 
     time.sleep(5) 
     kit.motor2.throttle = 0.0  
-    time.sleep(5)
 
 # Main program loop
 while True:
-    descend()
-    ascend()
+    while time.time() - start_time < duration:
+        transmit()
 
+    descend()
+    time.sleep(5)
+    ascend()
     time.sleep(5)
