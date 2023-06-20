@@ -24,20 +24,6 @@ cabrillorobotics@gmail.com
 '''
 
 # # # # # # # #
-# IMPORTS
-# # # # # # # #
-
-import time
-import board
-import busio
-import digitalio
-from adafruit_motorkit import MotorKit
-
-# lora radio library
-import adafruit_rfm9x
-
-
-# # # # # # # #
 # CONSTANTS
 # # # # # # # #
 
@@ -64,6 +50,20 @@ BILGE_EMPTY_DURATION = 5
 
 # number of seconds it takes for the float to rise to the surface
 SURFACE_DURATION = 5
+
+
+# # # # # # # #
+# IMPORTS
+# # # # # # # #
+
+import time
+import board
+import busio
+import digitalio
+from adafruit_motorkit import MotorKit
+
+# lora radio library
+import adafruit_rfm9x
 
 
 # # # # # # # # #
@@ -98,7 +98,6 @@ rfm9x.node = FLOAT_LORA_ID
 rfm9x.destination = DECK_LORA_ID
 
 
-
 # # # # # # # #
 # MotorKit SETUP
 # # # # # # # #
@@ -130,7 +129,11 @@ def surface():
     time.sleep(BILGE_EMPTY_DURATION) 
     kit.motor2.throttle = 0.0  
 
-# Main program loop
+
+# # # # # # # #
+# Main Loop
+# # # # # # # #
+
 while True:
     start_time = time.time()
     while time.time() - start_time < TRANSMIT_DURATION:
