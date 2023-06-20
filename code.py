@@ -36,6 +36,9 @@ import adafruit_rfm9x
 
 import time
 
+# stepper imports
+from adafruit_motor import stepper
+
 # instantiate the spi interface
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 
