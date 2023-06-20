@@ -60,7 +60,6 @@ kit = MotorKit()
 
 TEAM_NUM = "PN03"
 duration = 10
-start_time = time.time()
 def transmit():
     rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
     time.sleep(.5)
@@ -81,6 +80,7 @@ def ascend():
 
 # Main program loop
 while True:
+    start_time = time.time()
     while time.time() - start_time < duration:
         transmit()
 
