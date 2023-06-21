@@ -106,6 +106,11 @@ rfm9x.destination = DECK_LORA_ID
 # Set up the motor kit
 kit = MotorKit()
 
+# stop motors on init
+# incase a power cycle happens while motors are running
+kit.motor1.throttle = 0.0
+kit.motor2.throttle = 0.0
+
 
 # # # # # # # #
 # Functions
