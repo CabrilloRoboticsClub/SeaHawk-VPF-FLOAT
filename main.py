@@ -40,13 +40,13 @@ DECK_LORA_ID = 28
 TRANSMIT_DURATION = 10
 
 # number of seconds it takes for the pump to fill the tank
-BILGE_FILL_DURATION = 5
+BILGE_FILL_DURATION = 15
 
 # number of seconds it takes for the float to sink to the bottom
 DIVE_DURATION = 5
 
 # number of seconds it takes for the pump to empty the tank
-BILGE_EMPTY_DURATION = 5
+BILGE_EMPTY_DURATION = 15
 
 # number of seconds it takes for the float to rise to the surface
 SURFACE_DURATION = 5
@@ -65,6 +65,8 @@ from adafruit_motorkit import MotorKit
 # lora radio library
 import adafruit_rfm9x
 
+# neopixel
+import neopixel
 
 # # # # # # # # #
 # BUS SETUP
@@ -81,6 +83,15 @@ RESET = digitalio.DigitalInOut(board.D6)
 
 # set the radio frequency to 915mhz (NOT 868)
 RADIO_FREQ_MHZ = 915.0 
+
+
+# # # # # # # #
+# neopixel setup
+# # # # # # # #
+
+pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
+
+pixel.brightness = .3
 
 
 # # # # # # # #
@@ -118,11 +129,16 @@ kit.motor2.throttle = 0.0
 
 # transmit the time in seconds
 def transmit():
+    # set the neopixel yellow
+    pixel.fill((255, 255, 0))
+
     rfm9x.send(bytes(TEAM_NUM + " " + str(int(time.monotonic())), "utf-8"))
     time.sleep(.5)
 
 # fill the ballast with water to make the float dive
 def dive():
+    # set the neopixel blue
+    pixel.fill((0, 0, 255))
     # motor1 is the motor that fills the reservoir with water
     kit.motor1.throttle = 1.0
     time.sleep(BILGE_FILL_DURATION)
@@ -130,11 +146,16 @@ def dive():
 
 # empty the ballast to make the float surface
 def surface():
+    # set the neopixel green
+    pixel.fill((0, 255, 0))
     # motor2 is the motor that empties the reservoir
     kit.motor2.throttle = 1.0
     time.sleep(BILGE_EMPTY_DURATION)
     kit.motor2.throttle = 0.0
 
+# set led white
+# hardware init complete
+pixel.fill((255,255,255))
 
 # # # # # # # #
 # Main Loop
