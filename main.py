@@ -118,7 +118,7 @@ kit.motor2.throttle = 0.0
 
 # transmit the time in seconds
 def transmit():
-    rfm9x.send(bytes("Team: " + TEAM_NUM + "\r\n" + "Time: " + str(int(time.monotonic())) + "\r\n", "utf-8"))
+    rfm9x.send(bytes(TEAM_NUM + " " + str(int(time.monotonic())), "utf-8"))
     time.sleep(.5)
 
 # fill the ballast with water to make the float dive
