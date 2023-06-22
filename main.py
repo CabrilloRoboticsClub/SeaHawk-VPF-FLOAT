@@ -37,19 +37,19 @@ FLOAT_LORA_ID = 18
 DECK_LORA_ID = 28
 
 # number of seconds to wait on the surface transmitting before diving again
-TRANSMIT_DURATION = 10
+TRANSMIT_DURATION = 30
 
 # number of seconds it takes for the pump to fill the tank
 BILGE_FILL_DURATION = 15
 
 # number of seconds it takes for the float to sink to the bottom
-DIVE_DURATION = 5
+DIVE_DURATION = 15
 
 # number of seconds it takes for the pump to empty the tank
 BILGE_EMPTY_DURATION = 15
 
 # number of seconds it takes for the float to rise to the surface
-SURFACE_DURATION = 5
+SURFACE_DURATION = 15
 
 
 # # # # # # # #
