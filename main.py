@@ -82,7 +82,7 @@ CS = digitalio.DigitalInOut(board.D5)
 RESET = digitalio.DigitalInOut(board.D6)
 
 # set the radio frequency to 915mhz (NOT 868)
-RADIO_FREQ_MHZ = 915.0 
+RADIO_FREQ_MHZ = 915.0
 
 
 # # # # # # # #
@@ -91,7 +91,7 @@ RADIO_FREQ_MHZ = 915.0
 
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
 
-pixel.brightness = .3
+pixel.brightness = 1
 
 
 # # # # # # # #
@@ -172,7 +172,7 @@ while True:
         break
     else:
         pass
-        
+
 # profiling cycle
 while True:
     start_time = time.time()
