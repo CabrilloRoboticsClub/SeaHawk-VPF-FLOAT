@@ -43,7 +43,7 @@ TRANSMIT_DURATION = 30
 BILGE_FILL_DURATION = 15
 
 # number of seconds it takes for the float to sink to the bottom
-DIVE_DURATION = 15
+DIVE_DURATION = 45
 
 # number of seconds it takes for the pump to empty the tank
 BILGE_EMPTY_DURATION = 15
